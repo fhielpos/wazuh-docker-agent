@@ -1,5 +1,4 @@
 # Wazuh Docker Agent
----
 
 ## Description
 First iteration of a Wazuh Agent running on a Centos7 container. As this container should not run any other applications, all the default configuration were wiped.
