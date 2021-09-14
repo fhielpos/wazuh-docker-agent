@@ -69,7 +69,7 @@ main(){
   set_manager
 
   # Start Wazuh
-  /var/ossec/bin/ossec-control start
+  /var/ossec/bin/wazuh-control start
 }
 
 main
