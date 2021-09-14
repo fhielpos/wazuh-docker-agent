@@ -1,10 +1,11 @@
 name: Docker build and push
 
 on:
-  pull_request:
+  push:
     # Publish semver tags as releases.
     tags: [ 'v*.*' ]
-
+  pull_request:
+    branches: [ latest ]
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
