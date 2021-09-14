@@ -27,7 +27,7 @@ docker build -t wazuh-agent:4.2.1 .
 docker run -d \
 --env WAZUH_MANAGER_IP='MANAGER_IP' \
 --name=wazuh-agent \
-wazuh-agent:4.1.4
+wazuh-agent:4.2.1
 ```
 
 **Note** : If no `WAZUH_MANAGER_IP` is defined, then it is needed to define the IP with: `--add-host=wazuh-manager:<MANAGER_IP>`
