@@ -18,7 +18,7 @@ The following environment variables are allowed:
 ```
 git clone https://github.com/fhielpos/wazuh-docker-agent.git
 cd wazuh-docker-agent
-docker build -t wazuh-agent:4.1.4 .
+docker build -t wazuh-agent:4.2.1 .
 ```
 
 ### Run the Docker image
