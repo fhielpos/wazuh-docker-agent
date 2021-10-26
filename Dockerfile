@@ -1,6 +1,6 @@
 FROM centos:7
 
-ARG WAZUH_VERSION=4.2.1-1
+ARG WAZUH_VERSION=4.2.4-1
 
 COPY config/wazuh.repo /etc/yum.repos.d/wazuh.repo
 

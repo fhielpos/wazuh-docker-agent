@@ -18,7 +18,7 @@ The following environment variables are allowed:
 ```
 git clone https://github.com/fhielpos/wazuh-docker-agent.git
 cd wazuh-docker-agent
-docker build -t wazuh-agent:4.2.1 .
+docker build -t wazuh-agent:4.2.4 .
 ```
 
 ### Run the Docker image
@@ -27,7 +27,7 @@ docker build -t wazuh-agent:4.2.1 .
 docker run -d \
 --env WAZUH_MANAGER_IP='MANAGER_IP' \
 --name=wazuh-agent \
-wazuh-agent:4.2.1
+wazuh-agent:4.2.4
 ```
 
 **Note** : If no `WAZUH_MANAGER_IP` is defined, then it is needed to define the IP with: `--add-host=wazuh-manager:<MANAGER_IP>`
