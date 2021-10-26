@@ -1,5 +1,7 @@
 # Wazuh Docker Agent
 
+[![Docker build and push](https://github.com/fhielpos/wazuh-docker-agent/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/fhielpos/wazuh-docker-agent/actions/workflows/docker-publish.yml)
+
 ## Description
 First iteration of a Wazuh Agent running on a Centos7 container. As this container should not run any other applications, all the default configuration were wiped.
 
