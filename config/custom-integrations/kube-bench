@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Starting kube-bench Wazuh integration"
+
+/var/ossec/bin/wazuh-control start
+
+/var/ossec/custom-integrations/kube-bench.py
+
+echo "Finished"

@@ -22,5 +22,8 @@ RUN curl --fail --silent -L https://github.com/just-containers/s6-overlay/releas
     rm  /tmp/s6-overlay-amd64.tar.gz
 
 COPY config/etc/ /etc/
+COPY config/custom-integrations /var/ossec/custom-integrations
+
+RUN chmod +x /var/ossec/custom-integrations/*
 
 ENTRYPOINT ["/init"]
