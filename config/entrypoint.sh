@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/bin/bash
 
 WAZUH_INSTALL_PATH='/var/ossec'
 
@@ -23,6 +23,7 @@ exec_cmd() {
 }
 
 exec_cmd_stdout() {
+  echo "Executing command: $1"
   eval $1 2>&1 || error_and_exit "$1"
 }
 
@@ -60,7 +61,7 @@ set_manager(){
 
 main(){
   # Register the agent with the manager
-  if [ -z $(cat"${WAZUH_INSTALL_PATH}/etc/client.keys") ]
+  if [ -z $(cat "${WAZUH_INSTALL_PATH}/etc/client.keys") ]
   then
     register_agent
   fi
@@ -74,3 +75,4 @@ main(){
 
 main
 
+exec_cmd_stdout $1

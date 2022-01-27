@@ -60,7 +60,7 @@ set_manager(){
 
 main(){
   # Register the agent with the manager
-  if [ -z $(cat"${WAZUH_INSTALL_PATH}/etc/client.keys") ]
+  if [ -z $(cat "${WAZUH_INSTALL_PATH}/etc/client.keys") ]
   then
     register_agent
   fi

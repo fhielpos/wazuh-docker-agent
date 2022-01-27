@@ -28,6 +28,4 @@ RUN chmod +x /var/ossec/custom-integrations/*
 
 COPY config/entrypoint.sh /entrypoint.sh
 
-RUN chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["bash", "/entrypoint.sh"]
