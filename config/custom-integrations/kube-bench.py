@@ -33,7 +33,7 @@ while not finished or retries == 5:
                         msg['kube_bench'] = result
                         send_event(json.dumps(msg))
         finished = True
-    except FileNotFoundError:
+    except:
         retries += 1
         if retries != 5:
             logging.warning("kube-bench output file not found. Sleeping 30 seconds.")
