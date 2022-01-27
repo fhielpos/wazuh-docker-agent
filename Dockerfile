@@ -14,12 +14,12 @@ COPY --chown=root:ossec config/ossec.conf /var/ossec/etc/ossec.conf
 RUN curl -s https://bootstrap.pypa.io/pip/2.7/get-pip.py | python
 RUN python -m pip install docker
 
-ARG S6_VERSION="v2.2.0.3"
-RUN curl --fail --silent -L https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-amd64.tar.gz \
-    -o /tmp/s6-overlay-amd64.tar.gz && \
-    tar xzf /tmp/s6-overlay-amd64.tar.gz -C / --exclude="./bin" && \
-    tar xzf /tmp/s6-overlay-amd64.tar.gz -C /usr ./bin && \
-    rm  /tmp/s6-overlay-amd64.tar.gz
+# ARG S6_VERSION="v2.2.0.3"
+# RUN curl --fail --silent -L https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-amd64.tar.gz \
+#     -o /tmp/s6-overlay-amd64.tar.gz && \
+#     tar xzf /tmp/s6-overlay-amd64.tar.gz -C / --exclude="./bin" && \
+#     tar xzf /tmp/s6-overlay-amd64.tar.gz -C /usr ./bin && \
+#     rm  /tmp/s6-overlay-amd64.tar.gz
 
 COPY config/etc/ /etc/
 COPY config/custom-integrations /var/ossec/custom-integrations
