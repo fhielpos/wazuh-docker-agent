@@ -4,18 +4,14 @@ import json
 import time
 from socket import socket, AF_UNIX, SOCK_DGRAM
 
-
 socketAddr = '/var/ossec/queue/sockets/queue'
 
 def send_event(msg):
     try:
-        print('Sending {} to {} socket.'.format(msg, socketAddr))
+        #print('Sending {} to {} socket.'.format(msg, socketAddr))
         string = '1:kube-bench:{}'.format(msg)
         sock = socket(AF_UNIX, SOCK_DGRAM)
-        print(sock.connect(socketAddr))
-        print(sock.send(string.encode()))
-        sock.close()
-        print("Message sent")
+        print(sock.sendto(string.encode(), socketAddr))
     except:
         print("Error sending message to Wazuh socket.")
 
@@ -29,11 +25,8 @@ while not finished and retries != 5:
         with open('/var/log/kube-bench/kube-bench.json', 'r') as result:
             json_output = json.loads(result.read())
             for scan in json_output['Controls']:
-                print("Scan:", scan['text'])
                 for test in scan['tests']:
                     for result in test['results']:
-                        print("Check:", result['test_number'])
-                        print("Check status:", result['status'], result['test_desc'])
                         result['node_type'] = scan['node_type']
                         result['policy'] = scan['text']
                         result['section_description'] = test['desc']
@@ -42,6 +35,8 @@ while not finished and retries != 5:
                         msg['kube_bench'] = result
                         send_event(json.dumps(msg))
         finished = True
+        # Give time to Wazuh to send the messages before killing it
+        time.sleep(60)
     except:
         retries += 1
         if retries != 5:
