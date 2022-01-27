@@ -1,0 +1,5 @@
+#!/bin/bash
+
+/var/ossec/bin/wazuh-control stop
+
+/run/s6/basedir/bin/halt
