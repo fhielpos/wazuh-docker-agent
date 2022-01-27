@@ -34,8 +34,6 @@ register_agent() {
   if [ -n "$WAZUH_AGENT_GROUP" ]
   then
     REGISTER_ARGS+=" -G ${WAZUH_AGENT_GROUP}"
-  else
-    REGISTER_ARGS+=" -G ''"
   fi
     if [ -n "$WAZUH_AGENT_PREFIX" ]
   then
