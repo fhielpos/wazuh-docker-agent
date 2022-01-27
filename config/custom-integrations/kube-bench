@@ -18,7 +18,6 @@ def send_event(msg):
         sock.close()
     except:
         logging.exception("Error sending message to Wazuh socket.")
-        sys.exit(1)
 
 finished = False
 retries = 0
@@ -45,4 +44,3 @@ while not finished and retries != 5:
             time.sleep(30)
         else:    
             logging.error("kube-bench output not found. Max attempts reached. Exiting")
-            sys.exit(1)
