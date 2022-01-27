@@ -1,25 +1,23 @@
 #!/usr/bin/env python
 
 import json
-import logging
 import time
-import sys
 from socket import socket, AF_UNIX, SOCK_DGRAM
 
-logging.basicConfig(stream=sys.stdout)
 
 socketAddr = '/var/ossec/queue/sockets/queue'
 
 def send_event(msg):
     try:
-        logging.debug('Sending {} to {} socket.'.format(msg, socketAddr))
+        print('Sending {} to {} socket.'.format(msg, socketAddr))
         string = '1:kube-bench:{}'.format(msg)
         sock = socket(AF_UNIX, SOCK_DGRAM)
         sock.connect(socketAddr)
         sock.send(string.encode())
         sock.close()
+        print("Message sent")
     except:
-        logging.exception("Error sending message to Wazuh socket.")
+        print("Error sending message to Wazuh socket.")
 
 finished = False
 retries = 0
@@ -31,8 +29,11 @@ while not finished and retries != 5:
         with open('/var/log/kube-bench/kube-bench.json', 'r') as result:
             json_output = json.loads(result.read())
             for scan in json_output['Controls']:
+                print("Scan:", scan['text'])
                 for test in scan['tests']:
                     for result in test['results']:
+                        print("Check:", result['test_number'])
+                        print("Check status:", result['status'], result['test_desc'])
                         result['node_type'] = scan['node_type']
                         result['policy'] = scan['text']
                         result['section_description'] = test['desc']
@@ -44,7 +45,7 @@ while not finished and retries != 5:
     except:
         retries += 1
         if retries != 5:
-            logging.warning("kube-bench output file not found. Sleeping 30 seconds.")
+            print("kube-bench output file not found. Sleeping 30 seconds.")
             time.sleep(30)
         else:    
-            logging.error("kube-bench output not found. Max attempts reached. Exiting")
+            print("kube-bench output not found. Max attempts reached. Exiting")

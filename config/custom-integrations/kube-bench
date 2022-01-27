@@ -5,4 +5,7 @@ then
     echo "Starting kube-bench Wazuh integration"
     /var/ossec/custom-integrations/kube-bench.py
     echo "kube-bench integration finished. Exiting"
+    exit 0
+else
+    exit 1
 fi
