@@ -3,7 +3,7 @@
 echo "Starting kube-bench Wazuh integration"
 
 # Wait for group sync
-sleep(30)
+sleep 15
 
 /var/ossec/custom-integrations/kube-bench.py
 
