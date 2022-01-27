@@ -35,7 +35,7 @@ register_agent() {
   then
     REGISTER_ARGS+=" -G ${WAZUH_AGENT_GROUP}"
   else
-    REGISTER_ARGS+=" -G \"\""
+    REGISTER_ARGS+=" -G ''"
   fi
     if [ -n "$WAZUH_AGENT_PREFIX" ]
   then
@@ -77,4 +77,7 @@ main(){
 
 main
 
-exec_cmd_stdout $1
+if [ -n "$1" ]
+then
+  exec_cmd_stdout $1
+fi
