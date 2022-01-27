@@ -26,4 +26,6 @@ COPY config/custom-integrations /var/ossec/custom-integrations
 
 RUN chmod +x /var/ossec/custom-integrations/*
 
-ENTRYPOINT ["/init"]
+COPY config/entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
