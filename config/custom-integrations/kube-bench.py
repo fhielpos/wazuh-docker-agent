@@ -12,8 +12,8 @@ def send_event(msg):
         print('Sending {} to {} socket.'.format(msg, socketAddr))
         string = '1:kube-bench:{}'.format(msg)
         sock = socket(AF_UNIX, SOCK_DGRAM)
-        sock.connect(socketAddr)
-        sock.send(string.encode())
+        print(sock.connect(socketAddr))
+        print(sock.send(string.encode()))
         sock.close()
         print("Message sent")
     except:
