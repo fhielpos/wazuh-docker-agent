@@ -37,7 +37,7 @@ while not finished and retries != 5:
         finished = True
         
         # Give time to Wazuh to send the messages before killing it
-        # time.sleep(60)
+        time.sleep(60)
     except:
         retries += 1
         if retries != 5:

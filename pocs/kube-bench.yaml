@@ -55,7 +55,7 @@ spec:
               mountPath: /var/log/kube-bench
         - name: wazuh-agent
           image: fhielpos/wazuh-agent:latest
-          command: ["/var/ossec/custom-integrations/kube-bench"]
+          args: ["/var/ossec/custom-integrations/kube-bench"]
           volumeMounts:
             - name: kube-bench-output
               mountPath: /var/log/kube-bench
