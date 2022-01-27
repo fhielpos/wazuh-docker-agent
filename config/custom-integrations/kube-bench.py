@@ -18,8 +18,6 @@ def send_event(msg):
 finished = False
 retries = 0
 
-time.sleep(10)
-
 while not finished and retries != 5:
     try:
         with open('/var/log/kube-bench/kube-bench.json', 'r') as result:
@@ -36,7 +34,7 @@ while not finished and retries != 5:
                         send_event(json.dumps(msg))
         finished = True
         
-        # Give time to Wazuh to send the messages before killing it
+        # Give time to Wazuh to send the messages before killing the container
         time.sleep(60)
     except:
         retries += 1
