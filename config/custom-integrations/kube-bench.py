@@ -11,7 +11,7 @@ def send_event(msg):
         #print('Sending {} to {} socket.'.format(msg, socketAddr))
         string = '1:kube-bench:{}'.format(msg)
         sock = socket(AF_UNIX, SOCK_DGRAM)
-        print(sock.sendto(string.encode(), socketAddr))
+        sock.sendto(string.encode(), socketAddr)
     except:
         print("Error sending message to Wazuh socket.")
 
@@ -35,8 +35,9 @@ while not finished and retries != 5:
                         msg['kube_bench'] = result
                         send_event(json.dumps(msg))
         finished = True
+        
         # Give time to Wazuh to send the messages before killing it
-        time.sleep(60)
+        # time.sleep(60)
     except:
         retries += 1
         if retries != 5:
