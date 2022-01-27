@@ -1,4 +1,4 @@
-#!/var/ossec/framework/python/bin/python3
+#!/usr/bin/env python
 
 import json
 import logging
@@ -20,17 +20,18 @@ retries = 0
 
 while not finished or retries == 5:
     try:
-        with open('kube-json.json', 'r') as result:
+        with open('/var/log/kube-bench/kube-bench.json', 'r') as result:
             json_output = json.loads(result.read())
             for scan in json_output['Controls']:
                 for test in scan['tests']:
                     for result in test['results']:
-                        msg = result
-                        msg['node_type'] = scan['node_type']
-                        msg['policy'] = scan['text']
-                        msg['section_description'] = test['desc']
+                        result['node_type'] = scan['node_type']
+                        result['policy'] = scan['text']
+                        result['section_description'] = test['desc']
+                        msg = {}
                         msg['integration'] = 'kube-bench'
-            print(json_output['Totals'])
+                        msg['kube_bench'] = result
+                        send_event(json.dumps(msg))
         finished = True
     except FileNotFoundError:
         retries += 1
@@ -39,6 +40,4 @@ while not finished or retries == 5:
             time.sleep(30)
         else:    
             logging.error("kube-bench output not found. Max attempts reached. Exiting")
-    except Exception as e:
-        logging.error(e)
-        break
+            break
