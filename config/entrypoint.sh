@@ -77,5 +77,7 @@ main
 
 if [ -n "$1" ]
 then
-  exec_cmd_stdout $1
+  exec_cmd_stdout "$@"
+else
+  exec_cmd_stdout "tail -F /var/ossec/logs/ossec.log"
 fi
